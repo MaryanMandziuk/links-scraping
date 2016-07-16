@@ -49,7 +49,7 @@ public class LinksScraping {
                 }
 
                 if (!check) {
-                    links.append(subjLink.get(i).text()).append('\n');
+                    links.append(subjLink.get(i).attr("href")).append('\n');
                 }
 
             }

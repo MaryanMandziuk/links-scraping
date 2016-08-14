@@ -8,6 +8,7 @@ package links.scraping;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.jsoup.Jsoup;
@@ -28,8 +29,8 @@ public class LinksScraping {
         Document doc = Jsoup.connect("http://leo-tvorit.livejournal.com/").timeout(5000).get();
         List<String> blackList = Arrays.asList("Карандаши", "Обзор");
 
-        StringBuilder links = new StringBuilder();
-
+//        StringBuilder links = new StringBuilder();
+        List<String> links = new ArrayList<>();
         while (true) {
             Elements subjLink = doc.getElementsByClass("subj-link");
 
@@ -49,7 +50,7 @@ public class LinksScraping {
                 }
 
                 if (!check) {
-                    links.append(subjLink.get(i).attr("href")).append('\n');
+                    links.add(subjLink.get(i).attr("href"));
                 }
 
             }
@@ -62,10 +63,10 @@ public class LinksScraping {
                 break; 
             }
         }
-
-        try (PrintWriter out = new PrintWriter(new File("links.txt"))) {
-                    out.println(links.toString());
-        } 
+        System.out.print(links.size());
+//        try (PrintWriter out = new PrintWriter(new File("links.txt"))) {
+//                    out.println(links.toString());
+//        } 
     }
 
 }
